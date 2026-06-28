@@ -4,6 +4,7 @@
 
 import { useState } from "react";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -34,10 +35,17 @@ export default function PhlebotomyDashboard({ role, userName }) {
         <div style={S.navItem(activeTab === "roster")} onClick={() => setActiveTab("roster")}>
           <span>📅</span> <span>Weekly Duty Roster</span>
         </div>
+        <div style={S.sectionHeader}>Equipment & Logs</div>
+        <div style={S.navItem(activeTab === "phleb_temp_monitoring")} onClick={() => setActiveTab("phleb_temp_monitoring")}>
+          <span>🌡️</span> <span>Temperature & Humidity Monitoring</span>
+        </div>
       </div>
       <div style={S.content}>
         {activeTab === "roster" && (
           <WeeklyDutyRoster department="Phlebotomy" role={role} userName={userName} />
+        )}
+        {activeTab === "phleb_temp_monitoring" && (
+          <TemperatureDashboard department="Phlebotomy" />
         )}
       </div>
     </div>

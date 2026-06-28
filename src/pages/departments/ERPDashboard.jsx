@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAuth } from "../../context/AuthContext";
 import WeeklyDutyRoster from "../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../modules/TemperatureMonitoring/TemperatureDashboard";
 import { db } from "../../firebase";
 import {
   collection, addDoc, getDocs, doc, getDoc,
@@ -991,6 +992,7 @@ export default function ERPDashboard() {
         <button style={S.tabBtn(activeTab === "search")} onClick={() => setActiveTab("search")}>🤖 AI Search Console</button>
         <button style={S.tabBtn(activeTab === "terminal")} onClick={() => setActiveTab("terminal")}>💻 Admin Terminal</button>
         <button style={S.tabBtn(activeTab === "settings")} onClick={() => setActiveTab("settings")}>⚙ System Settings</button>
+        <button style={S.tabBtn(activeTab === "temp_master")} onClick={() => setActiveTab("temp_master")}>🌡️ Temperature Cockpit</button>
       </div>
 
       {/* ─── TOAST NOTIFICATION ─────────────────────────────────────────────── */}
@@ -1007,6 +1009,11 @@ export default function ERPDashboard() {
         {/* ─── TAB 0: WEEKLY DUTY ROSTER ─────────────────────────────────────── */}
         {activeTab === "roster" && (
           <WeeklyDutyRoster department="ERP Administration" role={role} userName={currentUserName} />
+        )}
+
+        {/* ─── TAB: TEMPERATURE COCKPIT ───────────────────────────────────────── */}
+        {activeTab === "temp_master" && (
+          <TemperatureDashboard department={null} />
         )}
 
         {/* ─── TAB 1: SYSTEM OVERVIEW ──────────────────────────────────────── */}

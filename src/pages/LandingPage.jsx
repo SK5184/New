@@ -1,5 +1,5 @@
 // LandingPage.jsx
-// YL QMS — Introduction & entry point
+// MBL QMS — Introduction & entry point
 
 export default function LandingPage({ onEnter }) {
   const modules = [
@@ -39,12 +39,14 @@ export default function LandingPage({ onEnter }) {
         backdropFilter: "blur(10px)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <img src="/yl-logo.png" alt="YL" style={{
-            width: 36, height: 36, borderRadius: 9, objectFit: "cover",
-          }} />
+          <div style={{
+            width: 36, height: 36, borderRadius: 9, background: "#1D9E75",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: 18, fontWeight: 700, color: "#fff",
+          }}>M</div>
           <div>
-            <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em" }}>YL QMS</div>
-            <div style={{ fontSize: 10, color: "#4ADE80", letterSpacing: "0.06em" }}>
+            <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em" }}>MBL QMS</div>
+            <div style={{ fontSize: 10, color: "#5DCAA5", letterSpacing: "0.06em" }}>
               ISO 15189 : 2022
             </div>
           </div>
@@ -52,19 +54,19 @@ export default function LandingPage({ onEnter }) {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{
             fontSize: 11, padding: "3px 12px", borderRadius: 20,
-            border: "0.5px solid #16A34A", color: "#4ADE80",
+            border: "0.5px solid #1D9E75", color: "#5DCAA5",
           }}>
-            Your Laboratory
+            Microbiological Laboratory
           </span>
           <button
             onClick={onEnter}
             style={{
-              padding: "8px 20px", background: "#16A34A", color: "#fff",
+              padding: "8px 20px", background: "#1D9E75", color: "#fff",
               border: "none", borderRadius: 8, fontSize: 13, fontWeight: 500,
               cursor: "pointer", transition: "background 0.15s",
             }}
-            onMouseOver={e => e.target.style.background = "#15803D"}
-            onMouseOut={e => e.target.style.background = "#16A34A"}
+            onMouseOver={e => e.target.style.background = "#0F6E56"}
+            onMouseOut={e => e.target.style.background = "#1D9E75"}
           >
             Sign in →
           </button>
@@ -80,8 +82,8 @@ export default function LandingPage({ onEnter }) {
         <div style={{
           display: "inline-block",
           fontSize: 11, fontWeight: 500, letterSpacing: "0.1em",
-          color: "#4ADE80", textTransform: "uppercase",
-          border: "0.5px solid #16A34A", padding: "4px 14px", borderRadius: 20,
+          color: "#5DCAA5", textTransform: "uppercase",
+          border: "0.5px solid #1D9E75", padding: "4px 14px", borderRadius: 20,
           marginBottom: 24,
         }}>
           Quality Management System
@@ -90,17 +92,17 @@ export default function LandingPage({ onEnter }) {
         <h1 style={{
           fontSize: 48, fontWeight: 700, lineHeight: 1.1,
           letterSpacing: "-0.03em", margin: "0 0 20px",
-          background: "linear-gradient(135deg, #F0EEE8 0%, #4ADE80 100%)",
+          background: "linear-gradient(135deg, #F0EEE8 0%, #5DCAA5 100%)",
           WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
         }}>
-          YL Quality<br />Management System
+          MBL Quality<br />Management System
         </h1>
 
         <p style={{
           fontSize: 16, color: "#8B9E96", lineHeight: 1.7,
           maxWidth: 560, margin: "0 auto 40px",
         }}>
-          A comprehensive ISO 15189:2022 compliant QMS for Your Laboratory —
+          A comprehensive ISO 15189:2022 compliant QMS for Microbiological Laboratory —
           covering 30 departments, 15 quality indicators, and all pre-analytical to
           post-analytical workflows.
         </p>
@@ -108,14 +110,14 @@ export default function LandingPage({ onEnter }) {
         <button
           onClick={onEnter}
           style={{
-            padding: "13px 36px", background: "#16A34A", color: "#fff",
+            padding: "13px 36px", background: "#1D9E75", color: "#fff",
             border: "none", borderRadius: 10, fontSize: 15, fontWeight: 500,
             cursor: "pointer", letterSpacing: "-0.01em",
-            boxShadow: "0 0 40px rgba(22,163,74,0.3)",
+            boxShadow: "0 0 40px rgba(29,158,117,0.3)",
             transition: "all 0.15s",
           }}
-          onMouseOver={e => { e.target.style.background = "#15803D"; e.target.style.transform = "translateY(-1px)"; }}
-          onMouseOut={e => { e.target.style.background = "#16A34A"; e.target.style.transform = "translateY(0)"; }}
+          onMouseOver={e => { e.target.style.background = "#0F6E56"; e.target.style.transform = "translateY(-1px)"; }}
+          onMouseOut={e => { e.target.style.background = "#1D9E75"; e.target.style.transform = "translateY(0)"; }}
         >
           Enter QMS Portal →
         </button>
@@ -144,7 +146,7 @@ export default function LandingPage({ onEnter }) {
           textAlign: "center", padding: "0 28px",
           borderLeft: "0.5px solid rgba(255,255,255,0.08)",
         }}>
-          <div style={{ fontSize: 28, fontWeight: 700, color: "#4ADE80" }}>15</div>
+          <div style={{ fontSize: 28, fontWeight: 700, color: "#5DCAA5" }}>15</div>
           <div style={{ fontSize: 11, color: "#8B9E96", marginTop: 2 }}>Quality</div>
           <div style={{ fontSize: 10, color: "#4A5550" }}>indicators</div>
         </div>
@@ -154,7 +156,7 @@ export default function LandingPage({ onEnter }) {
       <div style={{ padding: "60px 40px", maxWidth: 1000, margin: "0 auto" }}>
         <div style={{
           fontSize: 11, fontWeight: 500, letterSpacing: "0.1em",
-          color: "#4ADE80", textTransform: "uppercase", marginBottom: 24,
+          color: "#5DCAA5", textTransform: "uppercase", marginBottom: 24,
           textAlign: "center",
         }}>
           Integrated modules
@@ -171,8 +173,8 @@ export default function LandingPage({ onEnter }) {
               transition: "all 0.15s", cursor: "default",
             }}
               onMouseOver={e => {
-                e.currentTarget.style.background = "rgba(22,163,74,0.1)";
-                e.currentTarget.style.borderColor = "rgba(22,163,74,0.3)";
+                e.currentTarget.style.background = "rgba(29,158,117,0.08)";
+                e.currentTarget.style.borderColor = "rgba(29,158,117,0.3)";
               }}
               onMouseOut={e => {
                 e.currentTarget.style.background = "rgba(255,255,255,0.03)";
@@ -196,7 +198,7 @@ export default function LandingPage({ onEnter }) {
       }}>
         <div style={{ fontSize: 11, color: "#4A5550", letterSpacing: "0.08em" }}>
           DESIGNED FOR &nbsp;·&nbsp; ISO 15189 : 2022 &nbsp;·&nbsp;
-          NABL ACCREDITATION &nbsp;·&nbsp; YOUR LABORATORY
+          NABL ACCREDITATION &nbsp;·&nbsp; MICROBIOLOGICAL LABORATORY
         </div>
       </div>
 

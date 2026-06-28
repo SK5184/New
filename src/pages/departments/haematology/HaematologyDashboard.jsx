@@ -11,6 +11,8 @@ import {
 } from "firebase/firestore";
 import { calculateLinearRegression, calculateBlandAltman } from "../../../utils/biochemHelpers";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
+import SampleRetentionView from "../biochemistry/SampleRetentionView";
 
 // Premium Styling System
 const S = {
@@ -71,7 +73,9 @@ const TABS = [
   { key: "sample_receiving", label: "Sample Acceptance Log", icon: "📥", cat: "Pre-Examination & Process" },
   { key: "critical_reporting", label: "Critical Alert Reports", icon: "🚨", cat: "Pre-Examination & Process" },
   { key: "lis_security", label: "LIS & IT Security (27001)", icon: "🔒", cat: "Pre-Examination & Process" },
-  { key: "cont_edu", label: "Continuing Education", icon: "📘", cat: "Pre-Examination & Process" }
+  { key: "cont_edu", label: "Continuing Education", icon: "📘", cat: "Pre-Examination & Process" },
+  { key: "haem_sample_retention", label: "Sample Retention View", icon: "🗑️", cat: "Pre-Examination & Process" },
+  { key: "haem_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Equipment & Maintenance" }
 ];
 
 export default function HaematologyDashboard({ role, userName }) {
@@ -1128,7 +1132,15 @@ export default function HaematologyDashboard({ role, userName }) {
         )}
 
         {/* 8. MACHINE MAINTENANCE */}
-        {(activeTab === "maint_sysmex" || activeTab === "maint_alinity" || activeTab === "maint_acl") && (
+        {activeTab === "haem_temp_monitoring" && (
+          <TemperatureDashboard department="Haematology" />
+        )}
+
+        {activeTab === "haem_sample_retention" && (
+          <SampleRetentionView department="Haematology" />
+        )}
+
+        {((activeTab === "maint_sysmex" || activeTab === "maint_alinity" || activeTab === "maint_acl")) && (
           <div>
             <h3 style={{ margin: "0 0 4px", fontSize: 16, color: "#2C2C2A" }}>
               Analyzer Maintenance Checklist & Log — {activeTab === "maint_sysmex" ? "Sysmex XN 1000" : activeTab === "maint_alinity" ? "Alinity HQ" : "ACL TOP"}

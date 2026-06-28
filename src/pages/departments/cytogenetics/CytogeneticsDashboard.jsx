@@ -10,6 +10,8 @@ import {
 } from "firebase/firestore";
 import { calculateLinearRegression, calculateBlandAltman } from "../../../utils/biochemHelpers";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
+import SampleRejectionDashboard from "../SampleRejection/SampleRejectionDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -64,6 +66,7 @@ const TABS = [
   { key: "maint_centrifuge", label: "Centrifuge Maintenance", icon: "⚙️", cat: "Equipment & Logs" },
   { key: "maint_incubator", label: "Incubator Maintenance", icon: "🌡️", cat: "Equipment & Logs" },
   { key: "maint_safety_cabinet", label: "Safety Cabinet check", icon: "🛡️", cat: "Equipment & Logs" },
+  { key: "cyto_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Equipment & Logs" },
   { key: "media_prep", label: "Media Prep & Aliquoting", icon: "🧪", cat: "Equipment & Logs" },
   { key: "surveillance", label: "Microbial Surveillance", icon: "🧫", cat: "Equipment & Logs" },
   { key: "uv_exposure", label: "UV Exposure logs", icon: "🔆", cat: "Equipment & Logs" },
@@ -423,8 +426,16 @@ export default function CytogeneticsDashboard({ role, userName }) {
           </div>
         )}
 
+        {activeTab === "cyto_temp_monitoring" && (
+          <TemperatureDashboard department="Cytogenetics" />
+        )}
+
+        {activeTab === "sample_rejection" && (
+          <SampleRejectionDashboard department="Cytogenetics" />
+        )}
+
         {/* Dynamic Generic Forms & Logs */}
-        {activeTab !== "roster" && activeTab !== "test_master" && activeTab !== "lot_verification" && (
+        {activeTab !== "roster" && activeTab !== "test_master" && activeTab !== "lot_verification" && activeTab !== "cyto_temp_monitoring" && activeTab !== "sample_rejection" && (
           <div>
             <div style={S.card}>
               <div style={S.cardHeader}>

@@ -9,6 +9,7 @@ import {
   updateDoc, query, where, orderBy, serverTimestamp
 } from "firebase/firestore";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -71,7 +72,7 @@ const TABS = [
   { key: "maint_uprep", label: "Uprep Maintenance", icon: "⚙️", cat: "Equipment & Maintenance" },
   { key: "formalin_ph", label: "Formalin pH monitoring", icon: "🧪", cat: "Equipment & Maintenance" },
   { key: "housekeeping", label: "House Keeping Log", icon: "🧹", cat: "Equipment & Maintenance" },
-  { key: "humidity", label: "Humidity & Temp Log", icon: "🌡️", cat: "Equipment & Maintenance" },
+  { key: "histo_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Equipment & Maintenance" },
   
   { key: "consent_fna", label: "Consent - FNA", icon: "✍️", cat: "Pre-Examination & Process" },
   { key: "critical_result", label: "Critical Result Log", icon: "📞", cat: "Pre-Examination & Process" },
@@ -593,6 +594,10 @@ export default function HistopathologyCytopathologyDashboard({ role, userName })
             )}
 
             {/* Custom Formalin pH */}
+            {activeTab === "histo_temp_monitoring" && (
+              <TemperatureDashboard department="Histopathology & Cytopathology" />
+            )}
+
             {activeTab === "formalin_ph" && (
               <div style={S.card}>
                 <div style={S.cardHeader}><div style={S.cardTitle}>Formalin pH Quality Record (Target: 6.8 - 7.2)</div></div>
@@ -623,7 +628,7 @@ export default function HistopathologyCytopathologyDashboard({ role, userName })
             )}
 
             {/* Generic interactive log form for checklists */}
-            {activeTab !== "duty_roster" && activeTab !== "test_master" && activeTab !== "correlation" && activeTab !== "formalin_ph" && activeTab !== "comp_pathologist" && activeTab !== "comp_technicians" && (
+            {activeTab !== "duty_roster" && activeTab !== "test_master" && activeTab !== "correlation" && activeTab !== "formalin_ph" && activeTab !== "comp_pathologist" && activeTab !== "comp_technicians" && activeTab !== "histo_temp_monitoring" && (
               <div style={S.card}>
                 <div style={S.cardHeader}>
                   <div style={S.cardTitle}>New Checklist / Observation entry</div>

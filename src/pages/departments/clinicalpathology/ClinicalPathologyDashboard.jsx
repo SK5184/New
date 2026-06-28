@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { calculateLinearRegression, calculateBlandAltman } from "../../../utils/biochemHelpers";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
 
 // Premium Styling System (Charcoal & Grey Theme)
 const S = {
@@ -64,6 +65,7 @@ const TABS = [
   
   { key: "maint_minicap", label: "Minicap Maintenance", icon: "🔧", cat: "Equipment & Maintenance" },
   { key: "maint_stainer", label: "Stainer Maintenance", icon: "🔧", cat: "Equipment & Maintenance" },
+  { key: "cp_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Equipment & Maintenance" },
   
   { key: "sample_receiving", label: "Sample Acceptance Log", icon: "📥", cat: "Pre-Examination & Process" },
   { key: "critical_reporting", label: "Critical Alert Reports", icon: "🚨", cat: "Pre-Examination & Process" },
@@ -1619,6 +1621,10 @@ export default function ClinicalPathologyDashboard({ role, userName }) {
               </div>
             </div>
           </div>
+        )}
+        
+        {activeTab === "cp_temp_monitoring" && (
+          <TemperatureDashboard department="Clinical Pathology" />
         )}
 
       </div>

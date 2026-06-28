@@ -5,6 +5,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
+import SampleRetentionView from "../biochemistry/SampleRetentionView";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -57,7 +59,8 @@ const MENU_GROUPS = {
   ],
   "Examination Protocols": [
     { key: "mlrs_vs_vitek", label: "AST Equipment Comparison", icon: "📊" },
-    { key: "critical_list", label: "Critical Results List", icon: "🚨" }
+    { key: "critical_list", label: "Critical Results List", icon: "🚨" },
+    { key: "micro_sample_retention", label: "Sample Retention View", icon: "🗑️" }
   ],
   "Internal Quality Control": [
     { key: "iqc_vitek", label: "IQC - Vitek 2 Compact", icon: "📈" },
@@ -70,7 +73,8 @@ const MENU_GROUPS = {
   ],
   "Equipment & Maintenance": [
     { key: "hepa_filters", label: "HEPA Filter check logs", icon: "🌬️" },
-    { key: "maint_vitek", label: "Vitek 2 Maintenance", icon: "⚙️" }
+    { key: "maint_vitek", label: "Vitek 2 Maintenance", icon: "⚙️" },
+    { key: "micro_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️" }
   ]
 };
 
@@ -710,8 +714,17 @@ export default function MicrobiologyDashboard() {
           <WeeklyDutyRoster department="Microbiology" role={role} userName={userName} />
         )}
 
+        {/* Temperature & Humidity Monitoring */}
+        {activeTab === "micro_temp_monitoring" && (
+          <TemperatureDashboard department="Microbiology" />
+        )}
+
+        {activeTab === "micro_sample_retention" && (
+          <SampleRetentionView department="Microbiology" />
+        )}
+
         {/* Default / Fallback placeholders for other QMS tabs */}
-        {activeTab !== "mlrs_vs_vitek" && activeTab !== "roster" && (
+        {activeTab !== "mlrs_vs_vitek" && activeTab !== "roster" && activeTab !== "micro_temp_monitoring" && activeTab !== "micro_sample_retention" && (
           <div style={S.card}>
             <div style={S.cardHeader}>
               <div style={S.cardTitle}>⚙️ Microbiology QMS Module: {TABS.find(t => t.key === activeTab)?.label}</div>

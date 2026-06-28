@@ -9,6 +9,8 @@ import {
   updateDoc, query, where, orderBy, serverTimestamp
 } from "firebase/firestore";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
+import SampleRejectionDashboard from "../SampleRejection/SampleRejectionDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -72,7 +74,7 @@ const TABS = [
   { key: "audit_eval", label: "Audits (Internal & External)", icon: "📋", cat: "External Quality (EQAS)" },
 
   { key: "maint", label: "Equipment Maintenance", icon: "⚙️", cat: "Equipment & Logs" },
-  { key: "temp_refrigerator", label: "Refrigerator Temperature", icon: "🌡️", cat: "Equipment & Logs" },
+  { key: "flow_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Equipment & Logs" },
   { key: "stock", label: "Stock Inventory", icon: "📦", cat: "Equipment & Logs" },
   
   { key: "sample_handling", label: "Sample receiving & handling", icon: "📥", cat: "Pre-Examination & Process" },
@@ -572,8 +574,16 @@ export default function FlowCytometryDashboard({ role, userName }) {
               </div>
             )}
 
+            {activeTab === "flow_temp_monitoring" && (
+              <TemperatureDashboard department="Flow Cytometry" />
+            )}
+
+            {activeTab === "sample_rejection" && (
+              <SampleRejectionDashboard department="Flow Cytometry" />
+            )}
+
             {/* Generic interactive log form for checklists */}
-            {activeTab !== "duty_roster" && activeTab !== "test_master" && activeTab !== "iqc_cd" && activeTab !== "iqc_hlab27" && (
+            {activeTab !== "duty_roster" && activeTab !== "test_master" && activeTab !== "iqc_cd" && activeTab !== "iqc_hlab27" && activeTab !== "flow_temp_monitoring" && activeTab !== "sample_rejection" && (
               <div style={S.card}>
                 <div style={S.cardHeader}>
                   <div style={S.cardTitle}>New Checklist / Observation entry</div>

@@ -289,11 +289,30 @@ export default function KPIEntry() {
         docRef = doc(db, "kpiData", dep, "monthlyData", mk);
       }
       const snap = await getDoc(docRef);
+      let loadedEntries = {};
       if (snap.exists()) {
-        setEntries(snap.data().indicators || {});
-      } else {
-        setEntries({});
+        loadedEntries = snap.data().indicators || {};
       }
+
+      // Merge Sample Rejection Rate from qualityKPI
+      if (dep !== "Global") {
+        const qkpiDocRef = doc(db, "qualityKPI", `${dep}_${mk}`);
+        const qkpiSnap = await getDoc(qkpiDocRef);
+        if (qkpiSnap.exists()) {
+          const qkpiData = qkpiSnap.data();
+          if (qkpiData.metrics) {
+            loadedEntries["7.5.4"] = {
+              num: String(qkpiData.metrics.sampleRejected || 0),
+              den: String(qkpiData.metrics.sampleReceived || 0),
+              pct: qkpiData.metrics.rejectionRate || 0,
+              status: loadedEntries["7.5.4"]?.status || getStatus(qkpiData.metrics.rejectionRate, 5.0),
+              remarks: loadedEntries["7.5.4"]?.remarks || (qkpiData.topReasons ? `Top reasons: ${qkpiData.topReasons.join(", ")}` : "")
+            };
+          }
+        }
+      }
+
+      setEntries(loadedEntries);
     } catch (e) {
       console.error("Error loading KPI data:", e);
     } finally {

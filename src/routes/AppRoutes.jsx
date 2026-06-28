@@ -22,6 +22,8 @@ import UserManagement  from "../pages/UserManagement";
 import DepartmentMaster from "../pages/DepartmentMaster";
 import DirectorReview  from "../pages/DirectorReview";
 import TestMaster      from "../pages/TestMaster";
+import WorkHandover    from "../pages/WorkHandover";
+import ReagentCalibrationDashboard from "../modules/ReagentCalibration/ReagentCalibrationDashboard";
 
 
 // ── Quality management ────────────────────────────────────────────────────────
@@ -160,6 +162,8 @@ function AppShell({ children }) {
       "/help":                      "help",
       "/ai-assistant":              "aiassistant",
       "/test-master":               "testmaster",
+      "/work-handover":             "workhandover",
+      "/reagent-calibration":       "reagentcalibration",
     };
     // Department routes
     if (p.startsWith("/dept/")) {
@@ -213,6 +217,8 @@ function AppShell({ children }) {
       help:             "/help",
       aiassistant:      "/ai-assistant",
       testmaster:       "/test-master",
+      workhandover:     "/work-handover",
+      reagentcalibration: "/reagent-calibration",
       // departments
       microbiology:     "/dept/microbiology",
       serology:         "/dept/serology",
@@ -377,6 +383,7 @@ export default function AppRoutes() {
           
            
       {/* ── Laboratory ──────────────────────────────────── */}
+      <Route path="/reagent-calibration" element={<Guard module="reagentcalibration" element={<ReagentCalibrationDashboard {...authProps} />} />} />
       <Route path="/iqc"         element={<Guard module="iqc"         element={<IQC {...authProps} />} />} />
       <Route path="/eqa"         element={<Guard module="eqa"         element={<EQA {...authProps} />} />} />
       <Route path="/samples"     element={<Guard module="samples"     element={<ComingSoon pageName="Sample Management" icon="🧪" clause="ISO 15189:2022 §7.2" />} />} />
@@ -392,6 +399,7 @@ export default function AppRoutes() {
 
       {/* ── Test Master ────────────────────────────────── */}
       <Route path="/test-master"     element={<Guard module="testmaster"      element={<TestMaster {...authProps} />} />} />
+      <Route path="/work-handover"   element={<Guard module="workhandover"    element={<WorkHandover {...authProps} />} />} />
 
       {/* ── People ──────────────────────────────────────── */}
       <Route path="/training"    element={<Guard module="training"    element={<Training {...authProps} />} />} />

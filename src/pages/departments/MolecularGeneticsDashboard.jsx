@@ -10,6 +10,7 @@ import {
   updateDoc, query, where, orderBy, serverTimestamp
 } from "firebase/firestore";
 import WeeklyDutyRoster from "../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../modules/TemperatureMonitoring/TemperatureDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -52,7 +53,8 @@ const TABS = [
   { key: "auth_matrix", label: "Responsibility Matrix", icon: "🔑", cat: "General & Personnel" },
   { key: "sample_log", label: "Sample Processing Log", icon: "🧪", cat: "Pre-Examination & Process" },
   { key: "iqc_log", label: "IQC Run Logs", icon: "📈", cat: "Internal Quality Control" },
-  { key: "audit_trail", label: "Department Audit Log", icon: "📋", cat: "Quality & Audits" }
+  { key: "audit_trail", label: "Department Audit Log", icon: "📋", cat: "Quality & Audits" },
+  { key: "mg_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Equipment & Logs" }
 ];
 
 export default function MolecularGeneticsDashboard({ role, userName }) {
@@ -74,16 +76,7 @@ export default function MolecularGeneticsDashboard({ role, userName }) {
   
 
   // Resolve roles
-  const isSupervisor = role === "Supervisor" || role === "HOD" || role === "Admin" || role === "Managing Director" || role === "Deputy Director" || role === "IT Manager";
   const isHOD = role === "HOD" || role === "Admin" || role === "Managing Director" || role === "Deputy Director" || role === "IT Manager";
-  const isHR = role === "HRM" || role === "HRE" || role === "Admin" || role === "Managing Director" || role === "Deputy Director" || role === "IT Manager";
-  const isStaffOnly = role === "Staff" || (!isSupervisor && !isHOD && !isHR);
-
-  // Can the user edit the roster based on its current status and their role?
-  const canEdit = !isStaffOnly && (
-    (rosterStatus === "Draft" || rosterStatus === "Submitted" ? isSupervisor : false) ||
-    (rosterStatus === "Approved" || rosterStatus === "Published" ? isHOD : false)
-  );
 
   ;
 
@@ -248,7 +241,7 @@ export default function MolecularGeneticsDashboard({ role, userName }) {
     }
   };
 
-  const categories = ["General & Personnel", "Pre-Examination & Process", "Internal Quality Control", "Quality & Audits"];
+  const categories = ["General & Personnel", "Pre-Examination & Process", "Internal Quality Control", "Quality & Audits", "Equipment & Logs"];
 
   return (
     <div style={S.wrap}>
@@ -537,6 +530,11 @@ export default function MolecularGeneticsDashboard({ role, userName }) {
             </div>
           </div>
         )}
+        
+        {activeTab === "mg_temp_monitoring" && (
+          <TemperatureDashboard department="Molecular Genetics" />
+        )}
+
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
   updateDoc, query, where, orderBy, serverTimestamp
 } from "firebase/firestore";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F5F3FF", minHeight: "100vh", display: "flex" },
@@ -52,7 +53,7 @@ const TABS = [
   { key: "sample_receiving", label: "Sample Receipt Desk", icon: "📥", cat: "Specimen Logistics" },
   { key: "sorting_distribution", label: "Sorting & Distribution", icon: "📂", cat: "Specimen Logistics" },
   { key: "transit_time_outliers", label: "Transit Time Outliers", icon: "⏱️", cat: "Specimen Logistics" },
-  { key: "temp_transport", label: "Cold Box Temperature", icon: "❄️", cat: "Specimen Logistics" },
+  { key: "temp_transport", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Specimen Logistics" },
 
   { key: "non_conformance", label: "Non-Conformance log", icon: "⚠️", cat: "Quality & Incidents" },
   { key: "communication_issues", label: "Logistics Communications", icon: "🗣️", cat: "Quality & Incidents" },
@@ -468,60 +469,9 @@ export default function BackOfficeDashboard({ role, userName }) {
               </div>
             )}
 
-            {/* Cold Box Temperature Monitor */}
+            {/* Temperature & Humidity Monitoring */}
             {activeTab === "temp_transport" && (
-              <div style={S.card}>
-                <div style={S.cardHeader}><div style={S.cardTitle}>Cold Box Transport Temperature Audit Form</div></div>
-                <div style={S.cardBody}>
-                  <form onSubmit={handleTempSubmit}>
-                    <div style={S.grid(3)}>
-                      <div>
-                        <span style={S.label}>Cold Box ID</span>
-                        <select value={tempForm.coldBoxId} onChange={(e) => setTempForm({...tempForm, coldBoxId: e.target.value})} style={S.inp}>
-                          <option value="BOX-A01">BOX-A01 (Medium)</option>
-                          <option value="BOX-A02">BOX-A02 (Medium)</option>
-                          <option value="BOX-A03">BOX-A03 (Large)</option>
-                          <option value="BOX-C99">BOX-C99 (Critical-Ice)</option>
-                        </select>
-                      </div>
-                      <div>
-                        <span style={S.label}>Unboxing Temp Reading (°C)</span>
-                        <input type="number" step="0.1" required placeholder="e.g. 4.5" value={tempForm.boxTemperature} onChange={(e) => setTempForm({...tempForm, boxTemperature: e.target.value})} style={S.inp} />
-                      </div>
-                      <div>
-                        <span style={S.label}>Data Logger Present & Active?</span>
-                        <select value={tempForm.loggerChecked} onChange={(e) => setTempForm({...tempForm, loggerChecked: e.target.value})} style={S.inp}>
-                          <option value="Yes">Yes (Checked & Synced)</option>
-                          <option value="No">No (Logger Missing/Inactive)</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div style={{ ...S.grid(2), marginTop: 12 }}>
-                      <div>
-                        <span style={S.label}>Gel Ice Pack Condition</span>
-                        <select value={tempForm.icePackStatus} onChange={(e) => setTempForm({...tempForm, icePackStatus: e.target.value})} style={S.inp}>
-                          <option value="Intact">Intact / Partially Frozen (Good)</option>
-                          <option value="Melted">Melted / Liquid (Failure)</option>
-                          <option value="None">No Ice Packs Present</option>
-                        </select>
-                      </div>
-                      <div>
-                        <span style={S.label}>General Observations</span>
-                        <input type="text" placeholder="Remarks" value={tempForm.remarks} onChange={(e) => setTempForm({...tempForm, remarks: e.target.value})} style={S.inp} />
-                      </div>
-                    </div>
-
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16 }}>
-                      <span style={{ fontSize: 11, color: "#4F46E5", fontWeight: 500 }}>
-                        Target cold chain: <strong>2.0°C – 8.0°C</strong> (ISO 15189 Clause 7.2.5)
-                      </span>
-                      <button type="submit" disabled={saving} style={S.btn()}>
-                        Record Temperature Audit
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+              <TemperatureDashboard department="Back Office" />
             )}
 
             {/* Generic checklist form */}

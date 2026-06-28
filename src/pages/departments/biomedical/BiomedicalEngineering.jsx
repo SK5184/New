@@ -12,6 +12,7 @@ import PreventiveMaintenance from "./PreventiveMaintenance";
 import EquipmentDecommission from "./EquipmentDecommission";
 import EquipmentRecords from "./EquipmentRecords";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
 
 const TABS = [
   { key: "breakdown", label: "Breakdown Dashboard", icon: "⚠" },
@@ -19,6 +20,7 @@ const TABS = [
   { key: "verification", label: "Verification IQ/OQ/PQ", icon: "✅" },
   { key: "validation", label: "Validation", icon: "📋" },
   { key: "calibration", label: "Calibration", icon: "⚖" },
+  { key: "temp_master", label: "Environmental & Temp Master", icon: "🌡️" },
   { key: "manuals", label: "IFUs & Manuals", icon: "📖" },
   { key: "training", label: "Training & Auth", icon: "🎓" },
   { key: "preventive", label: "Preventive Maint.", icon: "🔧" },
@@ -61,6 +63,8 @@ export default function BiomedicalEngineering({ role, userName }) {
         return <EquipmentValidation {...props} />;
       case "calibration":
         return <EquipmentCalibration {...props} />;
+      case "temp_master":
+        return <TemperatureDashboard department={null} />;
       case "manuals":
         return <EquipmentManuals {...props} />;
       case "training":

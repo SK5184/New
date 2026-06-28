@@ -10,6 +10,8 @@ import {
   updateDoc, query, where, orderBy, serverTimestamp
 } from "firebase/firestore";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import SampleRejectionDashboard from "../SampleRejection/SampleRejectionDashboard";
+import RetentionDashboard from "../../quality/RetentionDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F2FAF7", minHeight: "100vh", display: "flex" },
@@ -53,6 +55,8 @@ const TABS = [
   { key: "capa_summary", label: "CAPA Control Center", icon: "🛡️", cat: "Quality Compliance" },
   { key: "audit_summary", label: "Audit Schedule Logs", icon: "📋", cat: "Quality Compliance" },
   { key: "ncr_summary", label: "Non-Conformances (NCR)", icon: "⚠️", cat: "Quality Compliance" },
+  { key: "sample_rejection_mgmt", label: "Sample Rejection Master", icon: "❌", cat: "Quality Compliance" },
+  { key: "sample_retention_control", label: "Sample Retention Master", icon: "🗑️", cat: "Quality Compliance" },
   
   { key: "doc_control", label: "Document Approvals", icon: "📄", cat: "Standard Documents" },
   { key: "complaints_feedback", label: "Feedback & Complaints", icon: "🗣️", cat: "Standard Documents" }
@@ -514,8 +518,16 @@ export default function QualityDashboard({ role, userName }) {
               </div>
             )}
 
+            {activeTab === "sample_rejection_mgmt" && (
+              <SampleRejectionDashboard department={null} />
+            )}
+
+            {activeTab === "sample_retention_control" && (
+              <RetentionDashboard />
+            )}
+
             {/* Generic log submission form */}
-            {activeTab !== "duty_roster" && activeTab !== "auth_matrix" && activeTab !== "capa_summary" && activeTab !== "ncr_summary" && activeTab !== "doc_control" && activeTab !== "audit_summary" && activeTab !== "complaints_feedback" && (
+            {activeTab !== "duty_roster" && activeTab !== "auth_matrix" && activeTab !== "capa_summary" && activeTab !== "ncr_summary" && activeTab !== "doc_control" && activeTab !== "audit_summary" && activeTab !== "complaints_feedback" && activeTab !== "sample_rejection_mgmt" && activeTab !== "sample_retention_control" && (
               <div style={S.card}>
                 <div style={S.cardHeader}><div style={S.cardTitle}>Log Verification Entry</div></div>
                 <div style={S.cardBody}>
@@ -550,7 +562,7 @@ export default function QualityDashboard({ role, userName }) {
             )}
 
             {/* Verification log history table */}
-            {activeTab !== "duty_roster" && activeTab !== "auth_matrix" && (
+            {activeTab !== "duty_roster" && activeTab !== "auth_matrix" && activeTab !== "sample_rejection_mgmt" && activeTab !== "sample_retention_control" && (
               <div style={S.card}>
                 <div style={S.cardHeader}><div style={S.cardTitle}>Quality Audit Log History</div></div>
                 <div style={S.cardBody}>

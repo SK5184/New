@@ -15,22 +15,20 @@ const NAV_SECTIONS = [
     label: "Quality management",
     items: [
       { key:"kpi",       icon:"📊", label:"KPI dashboard" },
-      { key:"analytics", icon:"🧠", label:"Quality Analytics" },
+      { key:"ncr",       icon:"⚠",  label:"NCR / CAPA" },
       { key:"documents", icon:"📄", label:"Document control" },
-      { key:"ncr",       icon:"⚠️",  label:"Non-Conformance (NCR)" },
-      { key:"capa",      icon:"🔧",  label:"Corrective Action (CAPA)" },
-      { key:"risk",      icon:"⚡",  label:"Risk Management" },
       { key:"audit",     icon:"📋", label:"Internal audit" },
       { key:"mrm",       icon:"🗂",  label:"Management review" },
-      { key:"planning",  icon:"📅", label:"Quality Planning" },
     ],
   },
   {
     label: "Laboratory",
     items: [
       { key:"samples",   icon:"🧪", label:"Sample management" },
-      { key:"iqc",       icon:"📈", label:"Internal QC (IQC)" },
-      { key:"eqa",       icon:"📉", label:"External QA (EQAS)" },
+      { key:"flowcyto",  icon:"🔬", label:"Flow Cytometry" },
+      { key:"iqc",       icon:"📈", label:"IQC / EQA" },
+      { key:"biochemistry", icon:"⚗", label:"Biochemistry" },
+      { key:"equipment", icon:"⚙",  label:"Equipment log" },
       { key:"reports",   icon:"📝", label:"Report errors" },
     ],
   },
@@ -49,17 +47,14 @@ const NAV_SECTIONS = [
       { key:"amendment",    icon:"✏",  label:"Record amendments" },
       { key:"biosafety",    icon:"🦠", label:"Biosafety log" },
       { key:"suppliers",    icon:"🚚", label:"Supplier register" },
-      { key:"purchase",     icon:"🛒", label:"Purchase & Store" },
     ],
   },
   {
     label: "ERP Admin",
     items: [
-      { key:"erpadmin",      icon:"⚙️",  label:"ERP Admin Dashboard" },
-      { key:"testmaster",    icon:"🔬",  label:"Test Master" },
       { key:"masterdata",    icon:"🗄",  label:"Master data" },
       { key:"accesscontrol", icon:"🛡",  label:"Access control" },
-      { key: "aiassistant",  icon: "🤖", label: "AI Gowri"}
+      { key: "  ",  icon: "🤖", label: "AI Gowri"}
     ],
   },
 ];

@@ -132,16 +132,7 @@ export default function TestMaster() {
     reportableRange: "",
     equipment: "",
     referenceMaterial: "",
-    proficiencyTesting: "BIORAD EQAS",
-    alternativeMethodology: "",
-    // QC Configurations
-    qcMeanL1: "", qcSdL1: "",
-    qcMeanL2: "", qcSdL2: "",
-    qcMeanL3: "", qcSdL3: "",
-    qcExpectedControlObserved: "Negative",
-    semiQuantCategories: "Negative, Trace, 1+, 2+, 3+",
-    expectedRange: "Negative",
-    linkedPlanId: ""
+    proficiencyTesting: ""
   });
 
   const fileInputRef = useRef(null);
@@ -205,15 +196,7 @@ export default function TestMaster() {
       reportableRange: "",
       equipment: "",
       referenceMaterial: "",
-      proficiencyTesting: "BIORAD EQAS",
-      alternativeMethodology: "",
-      qcMeanL1: "", qcSdL1: "",
-      qcMeanL2: "", qcSdL2: "",
-      qcMeanL3: "", qcSdL3: "",
-      qcExpectedControlObserved: "Negative",
-      semiQuantCategories: "Negative, Trace, 1+, 2+, 3+",
-      expectedRange: "Negative",
-      linkedPlanId: ""
+      proficiencyTesting: ""
     });
     showToast(`Test '${testToAdd.testName}' added with code ${testToAdd.mblCode}.`);
   };
@@ -323,7 +306,7 @@ export default function TestMaster() {
       <div style={S.topbar}>
         <div style={S.title}>
           <span>🗄️</span>
-          <span>MBL QMS — Test Master Console</span>
+          <span>MBL QMS —                                                                                                                                                                                                                                                                                  Console</span>
         </div>
         <div style={{ fontSize: 12, color: "#94A3B8" }}>
           Logged in: <strong>{userName}</strong> ({role})
@@ -551,74 +534,8 @@ export default function TestMaster() {
                   >
                     <option value="Quantitative">Quantitative</option>
                     <option value="Qualitative">Qualitative</option>
-                    <option value="Semi-Quantitative">Semi-Quantitative</option>
                   </select>
                 </div>
-              </div>
-
-              {/* Dynamic QC Config Fields */}
-              <div style={{ background: "#F8FAFC", border: "1px solid #E2E8F0", padding: 14, borderRadius: 10, marginBottom: 12 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: "#1E293B", marginBottom: 8, display: "flex", alignItems: "center", gap: 4 }}>
-                  <span>⚙️</span> IQC / QC Configurations (ISO §7.3.2)
-                </div>
-                
-                {newTest.type === "Quantitative" && (
-                  <div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
-                      <div>
-                        <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Level 1 Mean</label>
-                        <input type="number" step="0.001" style={S.inp} placeholder="e.g. 50" value={newTest.qcMeanL1} onChange={e => setNewTest({...newTest, qcMeanL1: e.target.value})} />
-                      </div>
-                      <div>
-                        <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Level 1 SD</label>
-                        <input type="number" step="0.001" style={S.inp} placeholder="e.g. 2.5" value={newTest.qcSdL1} onChange={e => setNewTest({...newTest, qcSdL1: e.target.value})} />
-                      </div>
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
-                      <div>
-                        <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Level 2 Mean</label>
-                        <input type="number" step="0.001" style={S.inp} placeholder="e.g. 100" value={newTest.qcMeanL2} onChange={e => setNewTest({...newTest, qcMeanL2: e.target.value})} />
-                      </div>
-                      <div>
-                        <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Level 2 SD</label>
-                        <input type="number" step="0.001" style={S.inp} placeholder="e.g. 5.0" value={newTest.qcSdL2} onChange={e => setNewTest({...newTest, qcSdL2: e.target.value})} />
-                      </div>
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                      <div>
-                        <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Level 3 Mean</label>
-                        <input type="number" step="0.001" style={S.inp} placeholder="e.g. 200" value={newTest.qcMeanL3} onChange={e => setNewTest({...newTest, qcMeanL3: e.target.value})} />
-                      </div>
-                      <div>
-                        <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Level 3 SD</label>
-                        <input type="number" step="0.001" style={S.inp} placeholder="e.g. 10.0" value={newTest.qcSdL3} onChange={e => setNewTest({...newTest, qcSdL3: e.target.value})} />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {newTest.type === "Qualitative" && (
-                  <div>
-                    <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Expected Control Result</label>
-                    <select style={S.inp} value={newTest.qcExpectedControlObserved} onChange={e => setNewTest({...newTest, qcExpectedControlObserved: e.target.value})}>
-                      <option value="Negative">Negative (Non-Reactive)</option>
-                      <option value="Positive">Positive (Reactive)</option>
-                    </select>
-                  </div>
-                )}
-
-                {newTest.type === "Semi-Quantitative" && (
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                    <div>
-                      <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Categories (Comma-separated)</label>
-                      <input type="text" style={S.inp} placeholder="e.g. Neg, Trace, 1+, 2+, 3+" value={newTest.semiQuantCategories} onChange={e => setNewTest({...newTest, semiQuantCategories: e.target.value})} />
-                    </div>
-                    <div>
-                      <label style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>Expected Target / Range</label>
-                      <input type="text" style={S.inp} placeholder="e.g. Neg to Trace" value={newTest.expectedRange} onChange={e => setNewTest({...newTest, expectedRange: e.target.value})} />
-                    </div>
-                  </div>
-                )}
               </div>
 
               <div style={{ marginBottom: 12 }}>
@@ -655,42 +572,16 @@ export default function TestMaster() {
                   />
                 </div>
                 <div>
-                  <label style={S.label}>Proficiency Testing (EQA / PT)</label>
-                  <select
+                  <label style={S.label}>Proficiency Testing (Lab)</label>
+                  <input
+                    type="text"
                     style={S.inp}
+                    placeholder="e.g. BIORAD/USA"
                     value={newTest.proficiencyTesting}
-                    onChange={(e) => setNewTest({ ...newTest, proficiencyTesting: e.target.value, alternativeMethodology: e.target.value === "Alternative Methodology (No Formal EQA Available)" ? "Sample Exchange: Participation in sample exchanges with other laboratories." : "" })}
-                  >
-                    <option value="BIORAD EQAS">BIORAD EQAS</option>
-                    <option value="CAP Surveys (College of American Pathologists)">CAP Surveys (College of American Pathologists)</option>
-                    <option value="RCPA PT (Royal College of Pathologists of Australasia)">RCPA PT (Royal College of Pathologists of Australasia)</option>
-                    <option value="CMC Vellore EQAS">CMC Vellore EQAS</option>
-                    <option value="AIIMS EQAS">AIIMS EQAS</option>
-                    <option value="NABL PT">NABL PT</option>
-                    <option value="Alternative Methodology (No Formal EQA Available)">Alternative Methodology (No Formal EQA Available)</option>
-                    <option value="Other Approved Indian Provider">Other Approved Indian Provider</option>
-                  </select>
+                    onChange={(e) => setNewTest({ ...newTest, proficiencyTesting: e.target.value })}
+                  />
                 </div>
               </div>
-
-              {newTest.proficiencyTesting === "Alternative Methodology (No Formal EQA Available)" && (
-                <div style={{ marginBottom: 16 }}>
-                  <label style={S.label}>Alternative Quality Assessment Methodology (ISO §7.3.7.2)</label>
-                  <select
-                    style={S.inp}
-                    value={newTest.alternativeMethodology}
-                    onChange={(e) => setNewTest({ ...newTest, alternativeMethodology: e.target.value })}
-                  >
-                    <option value="Sample Exchange: Participation in sample exchanges with other laboratories.">Sample Exchange: Participation in sample exchanges with other laboratories.</option>
-                    <option value="IQC Comparison: Interlaboratory comparisons of the results of examination of identical IQC materials.">IQC Comparison: Interlaboratory comparisons of identical IQC materials.</option>
-                    <option value="Calibrator Verification: Analysis of a different lot number of the manufacturer's end-user calibrator or trueness control material.">Calibrator Verification: Analysis of manufacturer calibrator/control lot.</option>
-                    <option value="Split Testing: Analysis of microbiological organisms using split/blind testing by at least two persons, analyzers, or methods.">Split Testing: Split/blind testing by two persons, analyzers, or methods.</option>
-                    <option value="Reference Materials: Analysis of reference materials considered commutable with patient samples.">Reference Materials: Analysis of commutable reference materials.</option>
-                    <option value="Clinical Correlation: Analysis of patient samples from clinical correlation studies.">Clinical Correlation: Analysis of samples from clinical correlation studies.</option>
-                    <option value="Repository Materials: Analysis of materials from cell and tissue repositories.">Repository Materials: Analysis of materials from cell/tissue repositories.</option>
-                  </select>
-                </div>
-              )}
 
               <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
                 <button type="button" style={S.btn("secondary")} onClick={() => setIsAddModalOpen(false)}>Cancel</button>

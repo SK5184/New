@@ -10,6 +10,8 @@ import {
 } from "firebase/firestore";
 import { calculateLinearRegression, calculateBlandAltman } from "../../../utils/biochemHelpers";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
+import SampleRejectionDashboard from "../SampleRejection/SampleRejectionDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -75,7 +77,7 @@ const TABS = [
   { key: "maint_euroimmun", label: "Euroimmun Maintenance", icon: "⚙️", cat: "Equipment Maintenance" },
   { key: "maint_liaison", label: "Liaison XL Maintenance", icon: "⚙️", cat: "Equipment Maintenance" },
   { key: "maint_phadia", label: "Phadia Maintenance", icon: "⚙️", cat: "Equipment Maintenance" },
-  { key: "temp_refrigerator", label: "Refrigerator temperature", icon: "🌡️", cat: "Equipment Maintenance" },
+  { key: "serology_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Equipment Maintenance" },
   
   { key: "cal_alinity1", label: "Calibration - Alinity CI 1", icon: "⚖️", cat: "Calibrations" },
   { key: "cal_alinity2", label: "Calibration - Alinity CI 2", icon: "⚖️", cat: "Calibrations" },
@@ -436,8 +438,16 @@ export default function SerologyDashboard({ role, userName }) {
           </div>
         )}
 
+        {activeTab === "serology_temp_monitoring" && (
+          <TemperatureDashboard department="Serology" />
+        )}
+
+        {activeTab === "sample_rejection" && (
+          <SampleRejectionDashboard department="Serology" />
+        )}
+
         {/* Dynamic Generic Forms & Logs */}
-        {activeTab !== "roster" && activeTab !== "test_master" && activeTab !== "lot_verification" && (
+        {activeTab !== "roster" && activeTab !== "test_master" && activeTab !== "lot_verification" && activeTab !== "serology_temp_monitoring" && activeTab !== "sample_rejection" && (
           <div>
             <div style={S.card}>
               <div style={S.cardHeader}>

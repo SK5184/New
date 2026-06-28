@@ -1,5 +1,5 @@
 // LoginPage.jsx
-// YL QMS — Firebase email login with department + role selector
+// MBL QMS — Firebase email login with department + role selector
 
 import { useState } from "react";
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
@@ -269,12 +269,14 @@ export default function LoginPage({ onSuccess, onBack }) {
 
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <img src="/yl-logo.png" alt="YL" style={{
-            width: 56, height: 56, borderRadius: 14, objectFit: "cover",
-            margin: "0 auto 14px", display: "block",
-          }} />
+          <div style={{
+            width: 48, height: 48, borderRadius: 12, background: "#1D9E75",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: 24, fontWeight: 700, color: "#fff",
+            margin: "0 auto 14px",
+          }}>M</div>
           <div style={{ fontSize: 18, fontWeight: 600, color: "#F0EEE8", letterSpacing: "-0.02em" }}>
-            Sign in to YL QMS
+            Sign in to MBL QMS
           </div>
           <div style={{ fontSize: 12, color: "#5A6E65", marginTop: 4 }}>
             ISO 15189 : 2022 · Quality Management System
@@ -318,7 +320,7 @@ export default function LoginPage({ onSuccess, onBack }) {
               </label>
               <input
                 style={inputStyle} type="email"
-                placeholder="you@yl.com"
+                placeholder="you@mbl.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
@@ -333,7 +335,7 @@ export default function LoginPage({ onSuccess, onBack }) {
                 </label>
                 <button type="button" onClick={handleOpenForgotModal}
                   style={{
-                    background: "none", border: "none", color: "#16A34A",
+                    background: "none", border: "none", color: "#1D9E75",
                     fontSize: 11, cursor: "pointer", padding: 0, fontWeight: 500,
                   }}>
                   Forgot Password?
@@ -454,7 +456,7 @@ export default function LoginPage({ onSuccess, onBack }) {
                 <form onSubmit={forgotTab === "phone" ? handleVerifyPhone : handleFetchQuestion}>
                   <div style={{ marginBottom: 12 }}>
                     <label style={{ fontSize: 11, fontWeight: 500, color: "#5F5E5A", display: "block", marginBottom: 4 }}>Registered Email Address</label>
-                    <input style={inputStyle} type="email" placeholder="you@yl.com" value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} required />
+                    <input style={inputStyle} type="email" placeholder="you@mbl.com" value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} required />
                   </div>
 
                   {forgotTab === "phone" && (
