@@ -1,5 +1,5 @@
 // HomePage.jsx
-// MBL QMS — Central Intranet Landing Portal & Operational Dashboard
+// YL QMS — Central Intranet Landing Portal & Operational Dashboard
 // Compliant with ISO 15189:2022 & ISO 27001:2022 standards
 
 import { useState, useEffect } from "react";
@@ -9,15 +9,15 @@ import { collection, addDoc, serverTimestamp, doc, getDoc, updateDoc, query, whe
 import NCRForm from "./NonConformity/NCRForm";
 
 const S = {
-  navBar: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 24px", background: "#0F172A", color: "#fff", position: "sticky", top: 0, zIndex: 100, borderBottom: "4px solid #0D9488", boxShadow: "0 2px 10px rgba(0,0,0,0.15)" },
+  navBar: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 24px", background: "#052e16", color: "#fff", position: "sticky", top: 0, zIndex: 100, borderBottom: "4px solid #16A34A", boxShadow: "0 2px 10px rgba(0,0,0,0.15)" },
   logoSection: { display: "flex", alignItems: "center", gap: 10, cursor: "pointer" },
   navTabs: { display: "flex", gap: 20, alignItems: "center" },
   navTabWrap: { position: "relative" },
   navTab: (active) => ({ color: active ? "#38BDF8" : "#E2E8F0", cursor: "pointer", fontSize: 12.5, fontWeight: 500, padding: "6px 10px", borderRadius: 4, transition: "all 0.2s ease" }),
-  dropdown: { position: "absolute", top: "100%", left: 0, background: "#1E293B", border: "1px solid #334155", borderRadius: 8, boxShadow: "0 10px 15px rgba(0,0,0,0.3)", padding: 6, minWidth: 200, display: "flex", flexDirection: "column", gap: 4, zIndex: 110, marginTop: 8 },
+  dropdown: { position: "absolute", top: "100%", left: 0, background: "#14532d", border: "1px solid #166534", borderRadius: 8, boxShadow: "0 10px 15px rgba(0,0,0,0.3)", padding: 6, minWidth: 200, display: "flex", flexDirection: "column", gap: 4, zIndex: 110, marginTop: 8 },
   dropItem: { padding: "8px 12px", color: "#E2E8F0", borderRadius: 4, fontSize: 11.5, cursor: "pointer", background: "transparent", border: "none", textAlign: "left", display: "flex", alignItems: "center", gap: 8, transition: "background 0.15s" },
   content: { background: "#F8FAFC", minHeight: "calc(100vh - 60px)", padding: "24px 32px" },
-  banner: { background: "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)", borderRadius: 14, padding: "24px 32px", color: "#fff", position: "relative", marginBottom: 24, border: "1px solid #334155", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)" },
+  banner: { background: "linear-gradient(135deg, #14532d 0%, #052e16 100%)", borderRadius: 14, padding: "24px 32px", color: "#fff", position: "relative", marginBottom: 24, border: "1px solid #166534", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)" },
   bannerTitle: { fontSize: 20, fontWeight: 700, letterSpacing: "-0.02em" },
   bannerSub: { fontSize: 12, color: "#94A3B8", marginTop: 4 },
   secTitle: { fontSize: 14, fontWeight: 600, color: "#1E293B", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 },
@@ -232,8 +232,8 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
       } else {
         setViewingDoc({
           id: "quality_manual",
-          title: "MBL Quality Manual",
-          docNumber: "QM-MBL-001",
+          title: "YL Quality Manual",
+          docNumber: "QM-YL-001",
           version: "1.0",
           effectiveDate: new Date().toISOString().split("T")[0],
           docType: "PDF",
@@ -244,8 +244,8 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
       console.error("Error reading Quality Manual:", err);
       setViewingDoc({
         id: "quality_manual",
-        title: "MBL Quality Manual",
-        docNumber: "QM-MBL-001",
+        title: "YL Quality Manual",
+        docNumber: "QM-YL-001",
         version: "1.0",
         effectiveDate: new Date().toISOString().split("T")[0],
         docType: "PDF",
@@ -383,7 +383,7 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
       return false;
     }
     try {
-      const disabledJSON = localStorage.getItem("mbl_disabled_modules");
+      const disabledJSON = localStorage.getItem("yl_disabled_modules");
       if (disabledJSON) {
         const disabledList = JSON.parse(disabledJSON);
         if (Array.isArray(disabledList) && disabledList.includes(deptKey)) {
@@ -482,9 +482,9 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
       {/* Intranet Navigation Header */}
       <nav style={S.navBar}>
         <div style={S.logoSection} onClick={() => { setActiveTab("portal"); setOpenDropdown(null); }}>
-          <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#0D9488", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>🔬</div>
+          <img src="/yl-logo.png" alt="YL" style={{ width: 36, height: 36, borderRadius: "50%", objectFit: "cover" }} />
           <div>
-            <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.01em" }}>MBL LABORATORIES</div>
+            <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.01em" }}>YL LABORATORIES</div>
             <div style={{ fontSize: 9.5, color: "#38BDF8", fontWeight: 600 }}>QMS PORTAL · ISO 15189:2022</div>
           </div>
         </div>
@@ -634,12 +634,12 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
             {/* Quality Policy Core Section */}
             <div style={S.card}>
               <div style={S.cardHeader}>
-                <div style={S.cardTitle}>📜 MBL Laboratory Quality Policy Statement</div>
+                <div style={S.cardTitle}>📜 YL Quality Policy</div>
               </div>
               <div style={{ ...S.cardBody, background: "#FFF" }}>
                 <div style={{ borderLeft: "4px solid #0D9488", paddingLeft: 16, margin: "0 0 16px" }}>
                   <p style={{ fontStyle: "italic", fontSize: 13.5, color: "#1E293B", lineHeight: "1.6em" }}>
-                    "MBL Laboratories is dedicated to delivering accurate, timely, and clinically reliable diagnostic services. We execute this by maintaining a rigorous Quality Management System under ISO 15189:2022 guidelines, employing trained professionals, validating equipment calibrations, and strictly safeguarding patient confidentiality in line with ISO 27001:2022 parameters."
+                    "YL Laboratories is dedicated to delivering accurate, timely, and clinically reliable diagnostic services. We execute this by maintaining a rigorous Quality Management System under ISO 15189:2022 guidelines, employing trained professionals, validating equipment calibrations, and strictly safeguarding patient confidentiality in line with ISO 27001:2022 parameters."
                   </p>
                 </div>
 
@@ -838,14 +838,14 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
           <div style={{ ...S.modal, maxWidth: activeModal === "dept_sops_grid" ? 900 : 580 }} onClick={(e) => e.stopPropagation()}>
             <div style={S.modalHeader}>
               <span style={S.modalTitle}>
-                {activeModal === "about" && "📖 About MBL QMS Architecture"}
+                {activeModal === "about" && "📖 About YL QMS Architecture"}
                 {activeModal === "history" && "🕰️ QMS Inception & Timeline History"}
                 {activeModal === "achievements" && "🏅 Compliance Milestones & Certifications"}
                 {activeModal === "capa_form" && "🚨 Log Corrective & Preventive Action (CAPA)"}
                 {activeModal === "ncr_form" && "⚠️ Log Non-Conformance Report (NCR)"}
                 {activeModal === "help_guide" && "📘 QMS User Quick-Reference Guide"}
                 {activeModal === "coming_soon" && "🔒 Connection Status: Coming Soon"}
-                {activeModal === "dept_sops_grid" && "📂 MBL QMS — Department SOPs (ISO 15189)"}
+                {activeModal === "dept_sops_grid" && "📂 YL QMS — Department SOPs (ISO 15189)"}
               </span>
               <button 
                 onClick={() => setActiveModal(null)}
@@ -903,7 +903,7 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
               {activeModal === "about" && (
                 <div>
                   <p style={{ margin: "0 0 14px", fontSize: 12.5, color: "#374151", lineHeight: "1.6em" }}>
-                    The MBL QMS is a digital control cockpit mapped to the requirements of ISO 15189:2022 (Clinical Laboratory Competence) and ISO 27001:2022 (Information Security).
+                    The YL QMS is a digital control cockpit mapped to the requirements of ISO 15189:2022 (Clinical Laboratory Competence) and ISO 27001:2022 (Information Security).
                   </p>
                   <p style={{ margin: "0 0 14px", fontSize: 12.5, color: "#374151", lineHeight: "1.6em" }}>
                     By enforcing standardized logging across all 13 medical divisions, the QMS tracks outliers in real-time. Any failed checklist or temperature breach generates a Quality CAPA ticket to secure laboratory outcomes.
@@ -921,7 +921,7 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
               {activeModal === "history" && (
                 <div>
                   <p style={{ margin: "0 0 12px", fontSize: 12.5, color: "#374151", lineHeight: "1.6em" }}>
-                    MBL QMS has grown from manual paper registries to a fully integrated real-time clinical tracking portal.
+                    YL QMS has grown from manual paper registries to a fully integrated real-time clinical tracking portal.
                   </p>
                   <table style={S.table}>
                     <thead>
@@ -956,7 +956,7 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
               {activeModal === "achievements" && (
                 <div>
                   <p style={{ margin: "0 0 14px", fontSize: 12.5, color: "#374151", lineHeight: "1.6em" }}>
-                    MBL Laboratories is audited annually to ensure compliance with global diagnostic metrics.
+                    YL Laboratories is audited annually to ensure compliance with global diagnostic metrics.
                   </p>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                     <div style={{ background: "#F0FDF4", border: "1px solid #A7F3D0", padding: 12, borderRadius: 8 }}>
@@ -1198,7 +1198,7 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
               pointerEvents: "none", zIndex: 1, opacity: 0.02, transform: "rotate(-15deg)",
               fontSize: 24, fontWeight: 800, color: "#FFF", letterSpacing: 2
             }}>
-              {Array(24).fill("CONFIDENTIAL - MBL QMS - SECURE AUDIT").map((txt, i) => (
+              {Array(24).fill("CONFIDENTIAL - YL QMS - SECURE AUDIT").map((txt, i) => (
                 <div key={i}>{txt}</div>
               ))}
             </div>
@@ -1233,7 +1233,7 @@ export default function HomePage({ setActivePage, userName, userDept, userRole }
                 {/* Letterhead */}
                 <div style={{ textAlign: "center", borderBottom: (2 * (zoom / 100)) + "px solid #CBD5E1", paddingBottom: 20 * (zoom / 100), marginBottom: 30 * (zoom / 100) }}>
                   <h1 style={{ margin: 0, fontSize: 22 * (zoom / 100), fontWeight: 800, letterSpacing: "-0.02em", color: "#0F172A" }}>
-                    MBL DIAGNOSTIC LABORATORIES
+                    YL DIAGNOSTIC LABORATORIES
                   </h1>
                   <span style={{ fontSize: 11 * (zoom / 100), color: "#0D9488", fontWeight: 700, letterSpacing: 2 * (zoom / 100), textTransform: "uppercase" }}>
                     Quality Management System
