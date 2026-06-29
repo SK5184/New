@@ -27,6 +27,9 @@ import SampleIntegrityChecks from "../SampleIntegrityChecks";
 import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
 import SampleRejectionDashboard from "../SampleRejection/SampleRejectionDashboard";
 import SampleRetentionView from "./SampleRetentionView";
+import IntraDeptMeetingForm from "../IntraDeptMeetingForm";
+import WorkHandover from "../../WorkHandover";
+import ReagentCalibrationDashboard from "../../../modules/ReagentCalibration/ReagentCalibrationDashboard";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -463,9 +466,9 @@ export default function BiochemistryDashboard() {
           </span>
         </div>
 
-        {/* ── SUB-FEATURE: WEEKLY DUTY ROSTER ── */}
-        {activeTab === "roster" && (
-          <WeeklyDutyRoster department="Biochemistry" role={role} userName={userName} />
+        {/* Weekly Duty Roster Tab */}
+        {activeTab === "biochem_duty_roster" && (
+          <WeeklyDutyRoster department="Biochemistry" role={role} userName={name} />
         )}
 
         {/* ── SUB-FEATURE: AUTHORIZATION MATRIX ── */}
@@ -830,8 +833,23 @@ export default function BiochemistryDashboard() {
           <SampleRetentionView department="Biochemistry" />
         )}
 
+        {/* ── SUB-FEATURE: INTRA-DEPARTMENT MEETING MINUTES ── */}
+        {activeTab === "biochem_meeting_form" && (
+          <IntraDeptMeetingForm department="Biochemistry" />
+        )}
+
+        {/* ── SUB-FEATURE: WORK HANDOVER ── */}
+        {activeTab === "biochem_work_handover" && (
+          <WorkHandover department="Biochemistry" />
+        )}
+
+        {/* ── SUB-FEATURE: REAGENT CALIBRATION ── */}
+        {activeTab === "biochem_reagent_calib" && (
+          <ReagentCalibrationDashboard department="Biochemistry" />
+        )}
+
         {/* ── GENERAL / DYNAMIC LOG TEMPLATE (Covers remaining ~100 sub-features) ── */}
-        {!["biochem_duty_roster", "biochem_auth_matrix", "biochem_iqc_analysis", "biochem_lot_to_lot", "biochem_comparability", "biochem_advisory", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention"].includes(activeTab) && (
+        {!["biochem_duty_roster", "biochem_auth_matrix", "biochem_iqc_analysis", "biochem_lot_to_lot", "biochem_comparability", "biochem_advisory", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention", "biochem_meeting_form", "biochem_work_handover", "biochem_reagent_calib"].includes(activeTab) && (
           <div style={S.card}>
             <div style={S.cardHeader}><span style={S.cardTitle}>Standard Workflow Parameter Entry (ISO Compliant Audit Trail)</span></div>
             <form onSubmit={handleGenericSubmit} style={S.cardBody}>
@@ -877,7 +895,7 @@ export default function BiochemistryDashboard() {
         )}
 
         {/* 3. Historical logs list */}
-        {!["biochem_iqc_analysis", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention"].includes(activeTab) && (
+        {!["biochem_iqc_analysis", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention", "biochem_meeting_form", "biochem_work_handover", "biochem_reagent_calib"].includes(activeTab) && (
           <div style={S.card}>
             <div style={S.cardHeader}>
               <span style={S.cardTitle}>Activity Logs & Verification History (Audit Trail)</span>
