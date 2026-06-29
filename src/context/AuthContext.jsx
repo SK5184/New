@@ -267,6 +267,7 @@ export function AuthProvider({ children }) {
   const canAccess = (moduleKey) => {
     if (moduleKey === "aiassistant") return true;
     if (moduleKey === "workhandover" || moduleKey === "reagentcalibration") return true;
+    if (moduleKey === "eqa" && canAccess("iqc")) return true;
     if (!permissions) return false;
     if (permissions.isSuperAdmin) return true;
     return permissions.modules?.includes(moduleKey) || false;

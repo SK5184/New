@@ -32,7 +32,8 @@ const NAV_SECTIONS = [
     label: "Laboratory",
     items: [
       { key:"samples",   icon:"🧪", label:"Sample management" },
-      { key:"iqc",       icon:"📈", label:"IQC / EQA" },
+      { key:"iqc",       icon:"📈", label:"Internal QC (IQC)" },
+      { key:"eqa",       icon:"📉", label:"External QA (EQAS)" },
       { key:"reagentcalibration", icon:"⚖️", label:"Reagent Calibration" },
       { key:"reports",   icon:"📝", label:"Report errors" },
     ],
