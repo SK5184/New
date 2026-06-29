@@ -58,9 +58,11 @@ const NAV_SECTIONS = [
   {
     label: "ERP Admin",
     items: [
+      { key:"erpadmin",      icon:"⚙️",  label:"ERP Admin Dashboard" },
+      { key:"testmaster",    icon:"🔬",  label:"Test Master" },
       { key:"masterdata",    icon:"🗄",  label:"Master data" },
       { key:"accesscontrol", icon:"🛡",  label:"Access control" },
-      { key: "aiassistant",  icon: "🤖", label: "AI Gowri"}
+      { key:"aiassistant",   icon:"🤖",  label:"AI Gowri"}
     ],
   },
 ];

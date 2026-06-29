@@ -154,11 +154,11 @@ const DEPT_PERMISSIONS = {
   },
   Administration: {
     "Managing Director": {
-      modules: ["dashboard","kpi","mrm","documents","ncr","audit","training","feedback","complaints","reports","equipment","users","amendment"],
+      modules: ["dashboard","kpi","mrm","documents","ncr","audit","training","feedback","complaints","reports","equipment","users","amendment","testmaster"],
       canViewKPI:true, canManageNCR:true, canApproveDoc:true, canManageAudit:true,
     },
     "Deputy Director": {
-      modules: ["dashboard","kpi","mrm","documents","ncr","audit","training","feedback","complaints","reports"],
+      modules: ["dashboard","kpi","mrm","documents","ncr","audit","training","feedback","complaints","reports","testmaster"],
       canViewKPI:true,
     },
   },
@@ -176,14 +176,14 @@ const DEPT_PERMISSIONS = {
     Admin: {
       modules: ["dashboard","kpi","equipment","documents","ncr","audit","mrm","samples","iqc",
                 "reports","training","feedback","complaints","users","amendment","biosafety",
-                "suppliers","masterdata","accesscontrol","aiassistant"  ],
+                "suppliers","masterdata","accesscontrol","aiassistant","erpadmin","testmaster"],
       isSuperAdmin: true, canManageUsers:true, canApproveDoc:true,
       canManageNCR:true, canManageAudit:true, canViewKPI:true,
       canManageEquipment:true, canManageMasterData:true, canManageAccess:true,
     },
     "Assistant Admin": {
       modules: ["dashboard","kpi","equipment","documents","ncr","training","users","amendment",
-                "masterdata","accesscontrol",  "aiassistant"],
+                "masterdata","accesscontrol","aiassistant","erpadmin","testmaster"],
       canManageUsers:true, canManageMasterData:true, canManageAccess:false,
     },
   },
