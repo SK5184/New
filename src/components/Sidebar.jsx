@@ -12,10 +12,17 @@ const NAV_SECTIONS = [
     ],
   },
   {
+    label: "Operations",
+    items: [
+      { key:"workhandover", icon:"🔄", label:"Work Handover" },
+      { key:"ncr",          icon:"⚠",  label:"Non-Conformance (NCR)" },
+      { key:"capa",         icon:"✅", label:"Corrective Action (CAPA)" },
+    ],
+  },
+  {
     label: "Quality management",
     items: [
       { key:"kpi",       icon:"📊", label:"KPI dashboard" },
-      { key:"ncr",       icon:"⚠",  label:"NCR / CAPA" },
       { key:"documents", icon:"📄", label:"Document control" },
       { key:"audit",     icon:"📋", label:"Internal audit" },
       { key:"mrm",       icon:"🗂",  label:"Management review" },
@@ -25,10 +32,8 @@ const NAV_SECTIONS = [
     label: "Laboratory",
     items: [
       { key:"samples",   icon:"🧪", label:"Sample management" },
-      { key:"flowcyto",  icon:"🔬", label:"Flow Cytometry" },
       { key:"iqc",       icon:"📈", label:"IQC / EQA" },
-      { key:"biochemistry", icon:"⚗", label:"Biochemistry" },
-      { key:"equipment", icon:"⚙",  label:"Equipment log" },
+      { key:"reagentcalibration", icon:"⚖️", label:"Reagent Calibration" },
       { key:"reports",   icon:"📝", label:"Report errors" },
     ],
   },
@@ -54,7 +59,7 @@ const NAV_SECTIONS = [
     items: [
       { key:"masterdata",    icon:"🗄",  label:"Master data" },
       { key:"accesscontrol", icon:"🛡",  label:"Access control" },
-      { key: "  ",  icon: "🤖", label: "AI Gowri"}
+      { key: "aiassistant",  icon: "🤖", label: "AI Gowri"}
     ],
   },
 ];
