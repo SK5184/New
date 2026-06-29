@@ -23,6 +23,10 @@ import {
   MOCK_ANALYZER_COMPARISON_DATA
 } from "../../../utils/biochemHelpers";
 import WeeklyDutyRoster from "../../../components/Common/WeeklyDutyRoster";
+import SampleIntegrityChecks from "../SampleIntegrityChecks";
+import TemperatureDashboard from "../../../modules/TemperatureMonitoring/TemperatureDashboard";
+import SampleRejectionDashboard from "../SampleRejection/SampleRejectionDashboard";
+import SampleRetentionView from "./SampleRetentionView";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -68,24 +72,14 @@ const TABS = [
   { key: "biochem_auth_matrix", label: "Responsibility & Auth Matrix", icon: "🔑", cat: "General & Personnel" },
   { key: "biochem_cont_edu", label: "Continuing Education", icon: "📘", cat: "General & Personnel" },
   { key: "biochem_training_eval", label: "Training Effectiveness", icon: "🎓", cat: "General & Personnel" },
-  { key: "biochem_staff_suggestions", label: "Staff Suggestions Form", icon: "💡", cat: "General & Personnel" },
   { key: "biochem_meeting_form", label: "Intra-Dept Meeting Form", icon: "🤝", cat: "General & Personnel" },
 
   // Pre-Examination & Process
-  { key: "biochem_sample_integrity", label: "Sample Integrity Checks", icon: "📥", cat: "Pre-Examination & Process" },
+  { key: "biochem_sample_integrity", label: "Stored Sample Stability Verification", icon: "📥", cat: "Pre-Examination & Process" },
   { key: "biochem_sample_rejection", label: "Sample Rejection Log", icon: "❌", cat: "Pre-Examination & Process" },
   { key: "biochem_sample_retention", label: "Sample Retention Policy", icon: "📁", cat: "Pre-Examination & Process" },
+  { key: "biochem_temp_monitoring", label: "Temperature & Humidity Monitoring", icon: "🌡️", cat: "Pre-Examination & Process" },
   { key: "biochem_deionized_water", label: "Deionized Water Quality", icon: "🚰", cat: "Pre-Examination & Process" },
-  { key: "biochem_humidity", label: "Humidity Log", icon: "🌬️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_freezer1", label: "Temp: Freezer (1)", icon: "❄️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_freezer2", label: "Temp: Freezer (2)", icon: "❄️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_ref1", label: "Temp: Refrigerator (1)", icon: "🌡️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_ref2", label: "Temp: Refrigerator (2)", icon: "🌡️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_ref3", label: "Temp: Refrigerator (3)", icon: "🌡️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_ref4", label: "Temp: Refrigerator (4)", icon: "🌡️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_ref5", label: "Temp: Refrigerator (5)", icon: "🌡️", cat: "Pre-Examination & Process" },
-  { key: "biochem_temp_room", label: "Temp: Room", icon: "🌡️", cat: "Pre-Examination & Process" },
-  { key: "biochem_periodic_temp", label: "Periodic Temperature", icon: "📅", cat: "Pre-Examination & Process" },
   { key: "biochem_work_handover", label: "Pending Work Handover", icon: "🔄", cat: "Pre-Examination & Process" },
   { key: "biochem_housekeeping_conn", label: "Housekeeping Connection", icon: "🧹", cat: "Pre-Examination & Process" },
 
@@ -816,8 +810,28 @@ export default function BiochemistryDashboard() {
           </div>
         )}
 
+        {/* ── SUB-FEATURE: STORED SAMPLE STABILITY VERIFICATION ── */}
+        {activeTab === "biochem_sample_integrity" && (
+          <SampleIntegrityChecks department="Biochemistry" />
+        )}
+
+        {/* ── SUB-FEATURE: TEMPERATURE & HUMIDITY MONITORING ── */}
+        {activeTab === "biochem_temp_monitoring" && (
+          <TemperatureDashboard department="Biochemistry" />
+        )}
+
+        {/* ── SUB-FEATURE: SAMPLE REJECTION MANAGEMENT ── */}
+        {activeTab === "biochem_sample_rejection" && (
+          <SampleRejectionDashboard department="Biochemistry" />
+        )}
+
+        {/* ── SUB-FEATURE: SAMPLE RETENTION POLICY ── */}
+        {activeTab === "biochem_sample_retention" && (
+          <SampleRetentionView department="Biochemistry" />
+        )}
+
         {/* ── GENERAL / DYNAMIC LOG TEMPLATE (Covers remaining ~100 sub-features) ── */}
-        {!["biochem_duty_roster", "biochem_auth_matrix", "biochem_iqc_analysis", "biochem_lot_to_lot", "biochem_comparability", "biochem_advisory"].includes(activeTab) && (
+        {!["biochem_duty_roster", "biochem_auth_matrix", "biochem_iqc_analysis", "biochem_lot_to_lot", "biochem_comparability", "biochem_advisory", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention"].includes(activeTab) && (
           <div style={S.card}>
             <div style={S.cardHeader}><span style={S.cardTitle}>Standard Workflow Parameter Entry (ISO Compliant Audit Trail)</span></div>
             <form onSubmit={handleGenericSubmit} style={S.cardBody}>
@@ -863,7 +877,7 @@ export default function BiochemistryDashboard() {
         )}
 
         {/* 3. Historical logs list */}
-        {activeTab !== "biochem_iqc_analysis" && (
+        {!["biochem_iqc_analysis", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention"].includes(activeTab) && (
           <div style={S.card}>
             <div style={S.cardHeader}>
               <span style={S.cardTitle}>Activity Logs & Verification History (Audit Trail)</span>
