@@ -30,6 +30,7 @@ import SampleRetentionView from "./SampleRetentionView";
 import IntraDeptMeetingForm from "../IntraDeptMeetingForm";
 import WorkHandover from "../../WorkHandover";
 import ReagentCalibrationDashboard from "../../../modules/ReagentCalibration/ReagentCalibrationDashboard";
+import ErrorRecords from "../ErrorRecords";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -848,8 +849,13 @@ export default function BiochemistryDashboard() {
           <ReagentCalibrationDashboard department="Biochemistry" />
         )}
 
+        {/* ── SUB-FEATURE: ERROR RECORDS & NC CAPA ── */}
+        {activeTab === "biochem_error_records" && (
+          <ErrorRecords department="Biochemistry" />
+        )}
+
         {/* ── GENERAL / DYNAMIC LOG TEMPLATE (Covers remaining ~100 sub-features) ── */}
-        {!["biochem_duty_roster", "biochem_auth_matrix", "biochem_iqc_analysis", "biochem_lot_to_lot", "biochem_comparability", "biochem_advisory", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention", "biochem_meeting_form", "biochem_work_handover", "biochem_reagent_calib"].includes(activeTab) && (
+        {!["biochem_duty_roster", "biochem_auth_matrix", "biochem_iqc_analysis", "biochem_lot_to_lot", "biochem_comparability", "biochem_advisory", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention", "biochem_meeting_form", "biochem_work_handover", "biochem_reagent_calib", "biochem_error_records"].includes(activeTab) && (
           <div style={S.card}>
             <div style={S.cardHeader}><span style={S.cardTitle}>Standard Workflow Parameter Entry (ISO Compliant Audit Trail)</span></div>
             <form onSubmit={handleGenericSubmit} style={S.cardBody}>
@@ -895,7 +901,7 @@ export default function BiochemistryDashboard() {
         )}
 
         {/* 3. Historical logs list */}
-        {!["biochem_iqc_analysis", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention", "biochem_meeting_form", "biochem_work_handover", "biochem_reagent_calib"].includes(activeTab) && (
+        {!["biochem_iqc_analysis", "biochem_sample_integrity", "biochem_temp_monitoring", "biochem_sample_rejection", "biochem_sample_retention", "biochem_meeting_form", "biochem_work_handover", "biochem_reagent_calib", "biochem_error_records"].includes(activeTab) && (
           <div style={S.card}>
             <div style={S.cardHeader}>
               <span style={S.cardTitle}>Activity Logs & Verification History (Audit Trail)</span>
