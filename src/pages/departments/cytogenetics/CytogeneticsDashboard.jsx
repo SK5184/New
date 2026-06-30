@@ -1,3 +1,4 @@
+import QualityIndicatorsLog from "../QualityIndicatorsLog";
 // CytogeneticsDashboard.jsx
 // ISO 15189:2022 & ISO 27001:2022 Compliant Cytogenetics Module
 
@@ -48,6 +49,7 @@ const S = {
 };
 
 const TABS = [
+  { key: "cytogenetics_quality_indicators", label: "Quality Indicators Log", icon: "📈", cat: "Examination Protocols" },
   { key: "roster", label: "Weekly Duty Roster", icon: "📅", cat: "General & Personnel" },
   { key: "auth_matrix", label: "Responsibility Matrix", icon: "🔑", cat: "General & Personnel" },
   { key: "sop_manual", label: "SOP Manual", icon: "📖", cat: "General & Personnel" },
@@ -531,7 +533,10 @@ export default function CytogeneticsDashboard({ role, userName }) {
             </div>
           </div>
         )}
-      </div>
+      {activeTab === "cytogenetics_quality_indicators" && (
+          <QualityIndicatorsLog department="Cytogenetics" />
+        )}
+        </div>
     </div>
   );
 }

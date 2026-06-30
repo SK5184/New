@@ -1,3 +1,4 @@
+import QualityIndicatorsLog from "../QualityIndicatorsLog";
 // MicrobiologyDashboard.jsx
 // ISO 15189:2022 & ISO 27001:2022 Compliant Microbiology Module
 // Rebuilt to include MLRS Vs VITEK Antibiotic Susceptibility Comparison System
@@ -60,7 +61,8 @@ const MENU_GROUPS = {
   "Examination Protocols": [
     { key: "mlrs_vs_vitek", label: "AST Equipment Comparison", icon: "📊" },
     { key: "critical_list", label: "Critical Results List", icon: "🚨" },
-    { key: "micro_sample_retention", label: "Sample Retention View", icon: "🗑️" }
+    { key: "micro_sample_retention", label: "Sample Retention View", icon: "🗑️" },
+    { key: "micro_quality_indicators", label: "Quality Indicators Log", icon: "📈" }
   ],
   "Internal Quality Control": [
     { key: "iqc_vitek", label: "IQC - Vitek 2 Compact", icon: "📈" },
@@ -772,6 +774,9 @@ export default function MicrobiologyDashboard() {
               </div>
             </div>
           </div>
+        )}
+        {activeTab === "micro_quality_indicators" && (
+          <QualityIndicatorsLog department="Microbiology" />
         )}
       </div>
 

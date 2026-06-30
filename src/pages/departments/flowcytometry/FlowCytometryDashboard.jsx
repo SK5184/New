@@ -1,3 +1,4 @@
+import QualityIndicatorsLog from "../QualityIndicatorsLog";
 // FlowCytometryDashboard.jsx
 // ISO 15189:2022 & ISO 27001:2022 Compliant Flow Cytometry Module
 
@@ -47,6 +48,7 @@ const S = {
 };
 
 const TABS = [
+  { key: "flowcytometry_quality_indicators", label: "Quality Indicators Log", icon: "📈", cat: "Examination Protocols" },
   { key: "duty_roster", label: "Weekly Duty Roster", icon: "📅", cat: "General & Personnel" },
   { key: "advisory", label: "Advisory Services", icon: "💬", cat: "General & Personnel" },
   { key: "communication", label: "Communication Log", icon: "📞", cat: "General & Personnel" },
@@ -686,7 +688,10 @@ export default function FlowCytometryDashboard({ role, userName }) {
             )}
           </div>
         )}
-      </div>
+      {activeTab === "flowcytometry_quality_indicators" && (
+          <QualityIndicatorsLog department="Flow Cytometry" />
+        )}
+        </div>
     </div>
   );
 }

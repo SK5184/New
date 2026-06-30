@@ -1,3 +1,4 @@
+import QualityIndicatorsLog from "../QualityIndicatorsLog";
 // HistopathologyCytopathologyDashboard.jsx
 // ISO 15189:2022 & ISO 27001:2022 Compliant Histopathology & Cytopathology Module
 
@@ -46,6 +47,7 @@ const S = {
 };
 
 const TABS = [
+  { key: "histopath_quality_indicators", label: "Quality Indicators Log", icon: "📈", cat: "Examination Protocols" },
   { key: "duty_roster", label: "Weekly Duty Roster", icon: "📅", cat: "General & Personnel" },
   { key: "advisory", label: "Advisory Services", icon: "💬", cat: "General & Personnel" },
   { key: "communication", label: "Communication Log", icon: "📞", cat: "General & Personnel" },
@@ -733,7 +735,10 @@ export default function HistopathologyCytopathologyDashboard({ role, userName })
             )}
           </div>
         )}
-      </div>
+      {activeTab === "histopath_quality_indicators" && (
+          <QualityIndicatorsLog department="Histopathology & Cytopathology" />
+        )}
+        </div>
     </div>
   );
 }

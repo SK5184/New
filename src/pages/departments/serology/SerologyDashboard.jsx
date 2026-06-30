@@ -1,3 +1,4 @@
+import QualityIndicatorsLog from "../QualityIndicatorsLog";
 // SerologyDashboard.jsx
 // ISO 15189:2022 & ISO 27001:2022 Compliant Serology Module
 
@@ -48,6 +49,7 @@ const S = {
 };
 
 const TABS = [
+  { key: "serology_quality_indicators", label: "Quality Indicators Log", icon: "📈", cat: "Examination Protocols" },
   { key: "roster", label: "Weekly Duty Roster", icon: "📅", cat: "General & Personnel" },
   { key: "handover", label: "Work Handover Register", icon: "🤝", cat: "General & Personnel" },
   { key: "sop", label: "SOP Manual", icon: "📖", cat: "General & Personnel" },
@@ -543,7 +545,10 @@ export default function SerologyDashboard({ role, userName }) {
             </div>
           </div>
         )}
-      </div>
+      {activeTab === "serology_quality_indicators" && (
+          <QualityIndicatorsLog department="Serology" />
+        )}
+        </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import QualityIndicatorsLog from "./QualityIndicatorsLog";
 // MolecularGeneticsDashboard.jsx
 // ISO 15189:2022 & ISO 27001:2022 Compliant Molecular Genetics Module
 // Dynamic Weekly Duty Roster with Role-Based Approvals and Timing Controls
@@ -49,6 +50,7 @@ const S = {
 };
 
 const TABS = [
+  { key: "molgen_quality_indicators", label: "Quality Indicators Log", icon: "📈", cat: "Examination Protocols" },
   { key: "roster", label: "Weekly Duty Roster", icon: "📅", cat: "General & Personnel" },
   { key: "auth_matrix", label: "Responsibility Matrix", icon: "🔑", cat: "General & Personnel" },
   { key: "sample_log", label: "Sample Processing Log", icon: "🧪", cat: "Pre-Examination & Process" },
@@ -535,7 +537,10 @@ export default function MolecularGeneticsDashboard({ role, userName }) {
           <TemperatureDashboard department="Molecular Genetics" />
         )}
 
-      </div>
+      {activeTab === "molgen_quality_indicators" && (
+          <QualityIndicatorsLog department="Molecular Genetics" />
+        )}
+        </div>
     </div>
   );
 }

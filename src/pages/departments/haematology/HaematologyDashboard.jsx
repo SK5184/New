@@ -1,3 +1,4 @@
+import QualityIndicatorsLog from "../QualityIndicatorsLog";
 // HaematologyDashboard.jsx
 // MBL QMS — Complete Haematology Department Dashboard
 // ISO 15189:2022 and ISO 27001:2022 Compliant Module
@@ -53,6 +54,7 @@ function today() { return new Date().toISOString().split("T")[0]; }
 
 // Categories mapping for sidebar
 const TABS = [
+  { key: "haem_quality_indicators", label: "Quality Indicators Log", icon: "📈", cat: "Examination Protocols" },
   { key: "roster", label: "Weekly Duty Roster", icon: "📅", cat: "General & Personnel" },
   { key: "auth_matrix", label: "Responsibility Matrix", icon: "🔑", cat: "General & Personnel" },
   { key: "test_master", label: "Test Master", icon: "🔬", cat: "Examination Protocols" },
@@ -1636,7 +1638,10 @@ export default function HaematologyDashboard({ role, userName }) {
           </div>
         )}
 
-      </div>
+      {activeTab === "haem_quality_indicators" && (
+          <QualityIndicatorsLog department="Haematology" />
+        )}
+        </div>
     </div>
   );
 }

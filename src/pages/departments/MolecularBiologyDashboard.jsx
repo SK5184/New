@@ -5,6 +5,7 @@
 import { useState } from "react";
 import WeeklyDutyRoster from "../../components/Common/WeeklyDutyRoster";
 import TemperatureDashboard from "../../modules/TemperatureMonitoring/TemperatureDashboard";
+import QualityIndicatorsLog from "./QualityIndicatorsLog";
 
 const S = {
   wrap: { fontFamily: "'Inter',system-ui,sans-serif", background: "#F7F6F2", minHeight: "100vh", display: "flex" },
@@ -39,6 +40,10 @@ export default function MolecularBiologyDashboard({ role, userName }) {
         <div style={S.navItem(activeTab === "mol_temp_monitoring")} onClick={() => setActiveTab("mol_temp_monitoring")}>
           <span>🌡️</span> <span>Temperature & Humidity Monitoring</span>
         </div>
+        <div style={S.sectionHeader}>Quality Control</div>
+        <div style={S.navItem(activeTab === "molbio_quality_indicators")} onClick={() => setActiveTab("molbio_quality_indicators")}>
+          <span>📈</span> <span>Quality Indicators Log</span>
+        </div>
       </div>
       <div style={S.content}>
         {activeTab === "roster" && (
@@ -46,6 +51,9 @@ export default function MolecularBiologyDashboard({ role, userName }) {
         )}
         {activeTab === "mol_temp_monitoring" && (
           <TemperatureDashboard department="Molecular Biology" />
+        )}
+        {activeTab === "molbio_quality_indicators" && (
+          <QualityIndicatorsLog department="Molecular Biology" />
         )}
       </div>
     </div>
