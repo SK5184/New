@@ -90,7 +90,6 @@ const TABS = [
 
   // Examination Protocols
   { key: "biochem_advisory", label: "Advisory Services Form", icon: "📖", cat: "Examination Protocols" },
-  { key: "biochem_performance_specs", label: "Performance Specs", icon: "📊", cat: "Examination Protocols" },
   { key: "biochem_reagent_calib", label: "Reagent Calibration", icon: "🧪", cat: "Examination Protocols" },
   { key: "biochem_error_records", label: "Error Records", icon: "⚠️", cat: "Examination Protocols" },
   { key: "biochem_quality_indicators", label: "Quality Indicators Log", icon: "📈", cat: "Examination Protocols" },
